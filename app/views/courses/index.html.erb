@@ -7,12 +7,14 @@
 	<tr>
 		<th>Name</th>
 		<th>Description</th>
+		<th>Status</th>
 		<th colspan="2"></th>
 	</tr>
 <% @courses.each do |course| %>
 	<tr>
 		<td><%= course.name %></td>
 		<td><%= course.description %></td>
+		<td><%= course.status %></td>
 		<td><%= link_to 'Show', course_path(course) %></td>
 		<td><%= link_to 'Edit', edit_course_path(course) %></td>
 		<td><%= link_to 'Destroy', course_path(course), 
