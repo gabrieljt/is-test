@@ -1,0 +1,30 @@
+<%= form_for @course do |f| %>
+<% if @course.errors.any? %>
+<div id="error_explanation">
+	<h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+	<ul>
+	<% @course.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+	<% end %>
+	</ul>
+</div>
+<% end %>
+<p>
+	<%= f.label :name %><br>
+	<%= f.text_field :name %>
+</p>
+
+<p>
+	<%= f.label :description %><br>
+	<%= f.text_area :description %>
+</p>
+
+<p>
+	<%= f.label :status %>
+    <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @course.status), {} , class: "form-control" %>
+</p>
+
+<p>
+	<%= f.submit %>
+</p>
+<% end %>
