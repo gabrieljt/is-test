@@ -14,7 +14,7 @@
 	<tr>
 		<td><%= course.name %></td>
 		<td><%= course.description %></td>
-		<td><%= course.status %></td>
+		<td><%= course.status.humanize %></td>
 		<td><%= link_to 'Show', course_path(course) %></td>
 		<td><%= link_to 'Edit', edit_course_path(course) %></td>
 		<td><%= link_to 'Destroy', course_path(course), 

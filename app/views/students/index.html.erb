@@ -14,7 +14,7 @@
 	<tr>
 		<td><%= student.name %></td>
 		<td><%= student.register_number %></td>
-		<td><%= student.status %></td>
+		<td><%= student.status.humanize %></td>
 		<td><%= link_to 'Show', student_path(student) %></td>
 		<td><%= link_to 'Edit', edit_student_path(student) %></td>
 		<td><%= link_to 'Destroy', student_path(student), 

@@ -9,12 +9,10 @@ class StudentsController < ApplicationController
 
 	def new
 		@student = Student.new
-		@statuses = Student.statuses
 	end
 
 	def create
 		@student = Student.new(student_params)
-		@statuses = Student.statuses
 
 		# Ensures that generated register number doesn't exists.
 		@register_number = rand.to_s[2..11]
@@ -22,6 +20,7 @@ class StudentsController < ApplicationController
 			@register_number = rand.to_s[2..11]
 		end	
 		@student.register_number = @register_number
+		@student.status = Student.statuses[:idle]
 
 		if @student.save
 			redirect_to @student
@@ -32,12 +31,10 @@ class StudentsController < ApplicationController
 
 	def edit
 		@student = Student.find(params[:id])
-		@statuses = Student.statuses
 	end
 
 	def update
 		@student = Student.find(params[:id])
-		@statuses = Student.statuses
 
 		if @student.update(student_params)
 			redirect_to @student
@@ -55,6 +52,6 @@ class StudentsController < ApplicationController
 
 	private 
 		def student_params
-			params.require(:student).permit(:name, :status)
+			params.require(:student).permit(:name)
 		end	
 end
