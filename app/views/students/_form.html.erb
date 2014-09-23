@@ -15,11 +15,6 @@
 </p>
 
 <p>
-	<%= f.label :register_number %><br>
-	<%= f.text_field :register_number %>
-</p>
-
-<p>
 	<%= f.label :status %>
     <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @student.status), {} , class: "form-control" %>
 </p>
