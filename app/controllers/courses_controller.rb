@@ -16,10 +16,6 @@ class CoursesController < ApplicationController
 		@course = Course.new(course_params)
 		@statuses = Course.statuses
 		if @course.save
-			#params[:student_].each do |s|
-			#	@student = Student.find(@s)
-			#	@course.classrooms.create(student: @student, entry_at: Time.zone.now)
-			#end
 			redirect_to @course
 		else
 			render 'new'
