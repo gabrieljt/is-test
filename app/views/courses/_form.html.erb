@@ -25,6 +25,11 @@
 </p>
 
 <p>
+	<%= f.label :student_ids %><br>
+	<%= f.select :student_ids, Student.all.collect {|s| [s.name, s.id]}, {}, :multiple => true %>
+</p>
+
+<p>
 	<%= f.submit %>
 </p>
 <% end %>

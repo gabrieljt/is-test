@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :courses, :students
+  resources :courses, :students do
+    resources :classrooms
+  end
   
   # get 'welcome/index'
 

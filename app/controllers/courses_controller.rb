@@ -12,10 +12,14 @@ class CoursesController < ApplicationController
 		@statuses = Course.statuses
 	end
 
-	def create
+	def create		
 		@course = Course.new(course_params)
 		@statuses = Course.statuses
 		if @course.save
+			#params[:student_].each do |s|
+			#	@student = Student.find(@s)
+			#	@course.classrooms.create(student: @student, entry_at: Time.zone.now)
+			#end
 			redirect_to @course
 		else
 			render 'new'
@@ -31,7 +35,7 @@ class CoursesController < ApplicationController
 		@course = Course.find(params[:id])
 		@statuses = Course.statuses
 
-		if @course.update(course_params)
+		if @course.update(course_params)			
 			redirect_to @course
 		else
 			render 'edit'
@@ -47,6 +51,6 @@ class CoursesController < ApplicationController
 
 	private 
 		def course_params
-			params.require(:course).permit(:name, :description, :status)
+			params.require(:course).permit(:name, :description, :status, :student_ids => [])
 		end
 end
