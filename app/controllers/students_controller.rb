@@ -14,13 +14,6 @@ class StudentsController < ApplicationController
 	def create
 		@student = Student.new(student_params)
 
-		# Ensures that generated register number doesn't exists.
-		@register_number = rand.to_s[2..11]
-		while Student.find_by(register_number: @register_number)
-			@register_number = rand.to_s[2..11]
-		end	
-		@student.register_number = @register_number
-
 		if @student.save
 			redirect_to @student
 		else
