@@ -13,5 +13,27 @@
 	<%= @student.status.humanize %>
 </p>
 
+<% if @student.courses.any? %>
+<h2>Courses</h2>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th>Status</th>
+		<th>Entry at</th>
+		<th colspan="2"></th>
+	</tr>
+	<% @student.courses.each do |course| %>
+	<tr>
+		<td><%= course.name %></td>
+		<td><%= course.description %></td>
+		<td><%= course.status.humanize %></td>
+		<td><%= course.classrooms.find_by(student: @student).created_at %>
+		<td><%= link_to 'Show', course_path(course) %></td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
+
 <%= link_to 'Back', students_path %>
 | <%= link_to 'Edit', edit_student_path(@student) %>

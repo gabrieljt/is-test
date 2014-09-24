@@ -14,16 +14,18 @@
 </p>
 
 <% if @course.students.any? %>
-<h2>Enrolled Students</h2>
+<h2>Students</h2>
 <table>
 	<tr>
 		<th>Name</th>
+		<th>Register Number</th>
 		<th>Entry at</th>
 		<th colspan="2"></th>
 	</tr>
 	<% @course.classrooms.each do |classroom| %>
 	<tr>
 		<td><%= classroom.student.name %></td>
+		<td><%= classroom.student.register_number %></td>
 		<td><%= classroom.created_at %></td>
 		<td><%= link_to 'Show', student_path(classroom.student) %></td>
 	</tr>

@@ -20,7 +20,6 @@ class StudentsController < ApplicationController
 			@register_number = rand.to_s[2..11]
 		end	
 		@student.register_number = @register_number
-		@student.status = Student.statuses[:idle]
 
 		if @student.save
 			redirect_to @student
@@ -36,6 +35,7 @@ class StudentsController < ApplicationController
 	def update
 		@student = Student.find(params[:id])
 
+		# Deletes ongoing and closed courses since they are not present in the multiple selection... how to avoid this?
 		if @student.update(student_params)
 			redirect_to @student
 		else
@@ -52,6 +52,6 @@ class StudentsController < ApplicationController
 
 	private 
 		def student_params
-			params.require(:student).permit(:name)
+			params.require(:student).permit(:name, :course_ids => [])
 		end	
 end
