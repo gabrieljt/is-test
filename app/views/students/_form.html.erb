@@ -15,6 +15,11 @@
 </p>
 
 <p>
+	<%= f.label :course_ids, 'Enrolling courses' %><br>
+	<%= f.select :course_ids, Course.where("status = ?", Course.statuses[:enrolling]).collect {|c| [c.name, c.id]}, {}, :multiple => true %>
+</p>
+
+<p>
 	<%= f.submit %>
 </p>
 <% end %>

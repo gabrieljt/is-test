@@ -24,10 +24,12 @@
     <%= f.select :status, options_for_select(@statuses.collect { |s| [s[0].humanize, s[0]] }, selected: @course.status), {} , class: "form-control" %>
 </p>
 
+<% if @course.enrolling? || @course.ongoing? %>
 <p>
-	<%= f.label :student_ids %><br>
+	<%= f.label :student_ids, 'Students' %><br>
 	<%= f.select :student_ids, Student.all.collect {|s| [s.name, s.id]}, {}, :multiple => true %>
 </p>
+<% end %>
 
 <p>
 	<%= f.submit %>

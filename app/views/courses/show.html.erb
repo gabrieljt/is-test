@@ -25,6 +25,7 @@
 	<tr>
 		<td><%= classroom.student.name %></td>
 		<td><%= classroom.created_at %></td>
+		<td><%= link_to 'Show', student_path(classroom.student) %></td>
 	</tr>
 	<% end %>
 </table>
