@@ -35,8 +35,15 @@ class StudentsController < ApplicationController
 	def update
 		@student = Student.find(params[:id])
 
-		# Deletes ongoing and closed courses since they are not present in the multiple selection... how to avoid this?
-		if @student.update(student_params)
+		# Avoids deleting ongoing and closed courses, which are not shown in the selection.
+		# There must be a better way to do this...		
+		@student.classrooms.each do |classroom|
+			if classroom.course.ongoing? || classroom.course.closed?
+				params[:student][:course_ids].push(classroom.course_id)
+			end
+		end		
+
+		if @student.update(student_params)			
 			redirect_to @student
 		else
 			render 'edit'
