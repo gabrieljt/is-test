@@ -1,1 +1,30 @@
 <h1>Welcome to Rails Courses!</h1>
+
+<p>Here you will find the best Rail Courses for free!<p>
+
+<p>New here? <%= link_to 'sign up', controller: 'students', action: 'new' %> now and enroll to any of the courses below!</p>
+
+<h2>Enrolling now</h2>
+<% if @courses.any? %>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Description</th>
+		<th colspan="2"></th>
+	</tr>
+	<% @courses.each do |course| %>
+	<tr>
+		<td><%= course.name %></td>
+		<td><%= course.description %></td>
+	</tr>
+	<% end %>
+</table>
+<% else %>
+<p>Uhhh... actually there is no course to be enrolled! Sorry for the inconvenience.</p>
+<% end %>
+
+<p>You can also checkout the <%= link_to 'courses area', controller: 'courses' %> to see the ongoing courses, as well as other courses that were already given and may be opened again soon!</p>
+
+<p>If you are looking for someone, be sure to see the <%= link_to 'students area', controller: 'students' %>, where all of our students are registred. </p>
+
+<p>Enjoy Ruby On Rails, the greatest open-source web framework ever!!!</p>

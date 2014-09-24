@@ -7,7 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= link_to 'Home', controller: 'welcome' %>
+<%= link_to 'Courses', controller: 'courses' %>
+<%= link_to 'Students', controller: 'students' %>
 <%= yield %>
 
 </body>

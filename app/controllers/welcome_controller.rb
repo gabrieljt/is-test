@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
-  def index
-  end
+	def index
+		@courses = Course.where("status = ?", Course.statuses[:enrolling])
+	end
 end
