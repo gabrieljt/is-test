@@ -6,7 +6,6 @@ class Student < ActiveRecord::Base
 
 	before_create :generate_register_number
 	before_save :update_status
-	#before_destroy :clear_classrooms
 
 	enum status: [ :idle, :enrolled ]
 	validates :name, presence: true
@@ -32,8 +31,4 @@ class Student < ActiveRecord::Base
 
 			@enrolled ? self.status = Student.statuses[:enrolled] : self.status = Student.statuses[:idle]
 		end		
-
-		#def clear_classrooms
-		#	self.classrooms.destroy_all
-		#end
 end
