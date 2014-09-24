@@ -3,6 +3,7 @@ class Classroom < ActiveRecord::Base
 	belongs_to :student
 
 	before_save :update_student_status
+	after_destroy :update_student_status
 
 	private 
 		def update_student_status
