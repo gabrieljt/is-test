@@ -22,6 +22,13 @@ class Student < ActiveRecord::Base
 		end
 
 		def update_status
-			self.courses.any? ? self.status = Student.statuses[:enrolled] : self.status = Student.statuses[:idle]
+			@enrolled = false
+			self.courses.each do |course|
+				if course.enrolling? || course.ongoing?
+					@enrolled = true
+				end
+			end
+
+			@enrolled ? self.status = Student.statuses[:enrolled] : self.status = Student.statuses[:idle]
 		end		
 end
