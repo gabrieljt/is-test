@@ -5,7 +5,7 @@ class Course < ActiveRecord::Base
 	accepts_nested_attributes_for :classrooms, :students
 
 	enum status: [ :enrolling, :ongoing, :closed ]
-	validates :name, presence: true
+	validates :name, presence: true, uniqueness: true
 	validates :description, presence: true
 	validates :status, presence: true
 end
