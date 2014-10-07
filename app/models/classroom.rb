@@ -5,7 +5,6 @@ class Classroom < ActiveRecord::Base
 	before_save :update_student_status
 	after_destroy :update_student_status
 
-	validates_presence_of :course, :student
 	validates_uniqueness_of :student_id, scope: :course_id
 
 	private 

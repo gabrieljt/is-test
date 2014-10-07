@@ -40,3 +40,18 @@ RSpec.describe StudentsController, :type => :controller do
 	    end
   	end
 end
+
+# Integration Tests
+RSpec.describe 'new and create', :type => :request do
+	context 'when valid params' do
+		it 'saves new student' do
+			student = Student.create!(:name => 'jdoe')
+    		get 'students/new'
+    		assert_select 'form' do
+      			assert_select 'input[name=?]', 'student[name]'
+      			assert_select 'input[type=?]', 'submit'
+      		end
+      		expect{ post '/students', student: student.attributes }.to change(Student, :count).by(1)
+    	end    	
+	end
+end

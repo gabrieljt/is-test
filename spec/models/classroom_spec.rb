@@ -8,30 +8,6 @@ RSpec.describe Classroom, :type => :model do
 	Classroom.create(course_id: 1, student_id: 1)
 
 	describe '#new' do
-		context 'when default constructor' do
-			classroom = Classroom.new
-
-			it 'is not valid' do
-				expect(classroom.valid?).to be_falsey
-			end
-
-			it 'has 2 errors' do
-  				expect(classroom.errors.count).to eq(2)
-			end
-
-			it 'is not valid without :course' do
-	  			expect(classroom.errors).to have_key(:course)
-			end
-
-			it 'is not valid without :student' do
-	  			expect(classroom.errors).to have_key(:student)
-			end
-
-			it 'cannot be saved' do
-  				expect(classroom.save).to be_falsey
-  			end
-		end
-
 		context 'when :course, :student' do
 			course = Course.new(name: 'ORM', description: 'Learn how to associate models like a boss.', status: 0)
 			student = Student.new(name: 'Foo')
