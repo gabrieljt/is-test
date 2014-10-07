@@ -26,4 +26,17 @@ RSpec.describe StudentsController, :type => :controller do
 	      	expect(response).to render_template("show")
 	    end
   	end
+
+  	describe "GET new" do		
+	    it "assigns @student" do
+	    	student = Student.new
+	      	get :new
+	      	expect(assigns(:student).attributes).to eq(student.attributes)
+	    end
+
+	    it "renders the new template" do
+	    	get :new
+	      	expect(response).to render_template("new")
+	    end
+  	end
 end

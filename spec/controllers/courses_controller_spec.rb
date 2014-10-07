@@ -26,4 +26,19 @@ RSpec.describe CoursesController, :type => :controller do
 	      	expect(response).to render_template("show")
 	    end
   	end
+
+  	describe "GET new" do		
+	    it "assigns @course, @statuses" do
+	    	course = Course.new
+	    	statuses = Course.statuses
+	      	get :new
+	      	expect(assigns(:course).attributes).to eq(course.attributes)
+	      	expect(assigns(:statuses)).to eq(statuses)
+	    end
+
+	    it "renders the new template" do
+	    	get :new
+	      	expect(response).to render_template("new")
+	    end
+  	end
 end
