@@ -9,8 +9,7 @@ class Student < ActiveRecord::Base
 
 	enum status: [ :idle, :enrolled ]
 	validates :name, presence: true	
-	validates :register_number, absence: true, uniqueness: true
-	validates :status, absence: true
+	validates :register_number, uniqueness: true
 
 	private
 		def generate_register_number			
