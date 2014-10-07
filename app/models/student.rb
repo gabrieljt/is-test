@@ -8,17 +8,13 @@ class Student < ActiveRecord::Base
 	before_save :update_status
 
 	enum status: [ :idle, :enrolled ]
-	validates :name, presence: true
-	validates :register_number, uniqueness: true	
+	validates :name, presence: true	
+	validates :register_number, absence: true, uniqueness: true
+	validates :status, absence: true
 
 	private
-		def generate_register_number
-			# Ensures that generated register number doesn't exists.
-			@register_number = rand.to_s[2..11]
-			while Student.find_by(register_number: @register_number)
-				@register_number = rand.to_s[2..11]
-			end	
-			self.register_number = @register_number
+		def generate_register_number			
+			self.register_number = rand.to_s[2..11]
 		end
 
 		def update_status

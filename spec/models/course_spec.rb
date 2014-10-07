@@ -1,45 +1,70 @@
 require 'rails_helper'
 
 RSpec.describe Course, :type => :model do
-  	#pending "add some examples to (or delete) #{__FILE__}"	
-  	describe "#new"	do
-  		it "fails save with default constructor" do
-  			course = Course.new
-  			expect(course.save).to eq(false)
-  			expect(course.errors.count).to eq(3)
-  			expect(course.errors.has_key?(:name)).to eq(true)
-  			expect(course.errors.has_key?(:description)).to eq(true)
-  			expect(course.errors.has_key?(:status)).to eq(true)
-  			expect(course.name).to eq(nil)
-  			expect(course.description).to eq(nil)
-  			expect(course.status).to eq(nil)
+	name = 'foo'
+	description = 'bar'
+	status = 0
+	Course.create(name: name, description: description, status: status)
+
+  	describe '#new'	do
+  		context 'when default constructor' do
+	  		course = Course.new
+
+			it 'is not valid' do
+				expect(course.valid?).to be_falsey
+			end
+
+			it 'has 3 errors' do
+  				expect(course.errors.count).to eq(3)
+			end
+
+			it 'is not valid without :name' do
+	  			expect(course.errors).to have_key(:name)
+			end
+
+			it 'is not valid without :description' do
+	  			expect(course.errors).to have_key(:description)
+			end
+
+			it 'is not valid without :status' do
+	  			expect(course.errors).to have_key(:status)
+			end
+
+			it 'cannot be saved' do
+  				expect(course.save).to be_falsey
+  			end
+		end
+
+		context 'when :name, :description, :status' do
+			course = Course.new(name: 'ORM', description: 'Learn how to associate models like a boss.', status: 0)
+
+  			it 'is valid' do
+  				expect(course.valid?).to be_truthy  				
+  			end
+
+  			it 'has 0 errors' do
+  				expect(course.errors.count).to be_zero
+  			end
+
+  			it 'can be saved' do
+  				expect(course.save).to be_truthy
+  			end
   		end
 
-  		it "succeeds save with assigned attributes" do
-  			name = 'ORM'
-  			description = 'Learn how to associate models like a boss.'
-  			status = 0
+  		context 'when :name is duplicated' do
+			course = Course.new(name: name, description: description, status: status)
 
-  			course = Course.new(name: name, description: description, status: status)
-  			expect(course.save).to eq(true)
-  			expect(course.errors.blank?).to eq(true)
-  			expect(course.name).to eq(name)
-  			expect(course.description).to eq(description)
-  			expect(course.enrolling?).to eq(true)
-  		end
+			it 'is not valid' do
+				expect(course.valid?).to be_falsey
+			end
 
-  		it "validates name uniqueness" do
-  			name = 'ORM'
-  			description = 'Learn how to associate models like a boss.'
-  			status = 0
+			it 'has :name error' do
+				expect(course.errors).to have_key(:name)
+			end
 
-  			course1 = Course.new(name: name, description: description, status: status)
-  			expect(course1.save).to eq(true)
-  			
-  			course2 = Course.new(name: name, description: description, status: status)
-  			expect(course2.save).to eq(false)
-  			expect(course2.errors.count).to eq(1)
-  			expect(course2.errors.has_key?(:name)).to eq(true)
-  		end
+			it 'cannot be saved' do
+				expect(course.save).to be_falsey
+			end
+		end
   	end
 end
